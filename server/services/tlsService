@@ -1,0 +1,27 @@
+const https = require('https');
+
+async function resolveTLS(target) {
+  return new Promise((resolve, reject) => {
+    if (!target.startsWith('https://')) {
+      target = 'https://' + target;
+    }
+
+    const start = Date.now();
+    https.get(target, (response) => {
+      const duration = Date.now() - start;
+      const cipher = response.socket.getCipher();
+
+      resolve({
+        statusCode: response.statusCode,
+        durationMs: duration,
+        tlsCipher: cipher.name,
+        tlsVersion: cipher.version,
+        redirectTo: response.headers?.location || null,
+      });
+    }).on('error', (err) => {
+      reject(new Error(`TLS 요청 실패: ${err.message || '알 수 없는 오류'}`));
+    });
+  });
+}
+
+module.exports = { resolveTLS };
