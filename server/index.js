@@ -3,16 +3,26 @@ const http = require('http');
 const cors = require('cors');
 const { Server } = require('socket.io');
 
+
 const app = express();
 const server = http.createServer(app);
 const port = 3000;
 
 const registerSocketHandlers = require('./sockets/socketHandler');
 const dnsRouter = require('./routes/dnsRoute');
+const tcpRouter = require('./routes/tcpRoute');
+const udpRouter = require('./routes/udpRoute');
+const startTcpServer = require('./socketServer/tcpSocketServer');
+const startUdpServer = require('./socketServer/udpSocketServer');
+
 
 app.use(cors());
 app.use(express.json());
 app.use('/dns', dnsRouter);
+app.use('/tcp', tcpRouter);
+app.use('/udp',udpRouter);
+
+
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
@@ -27,3 +37,6 @@ registerSocketHandlers(io);
 server.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
+
+startTcpServer();
+startUdpServer();
