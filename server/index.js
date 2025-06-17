@@ -17,6 +17,8 @@ const startUdpServer = require('./socketServer/udpSocketServer');
 const pingRouter = require('./routes/pingRoute');
 const tlsRouter = require('./routes/tlsRoute');
 
+const ipurlRouter = require('./routes/ipurlRoute');
+
 app.use(cors());
 app.use(express.json());
 app.use('/dns', dnsRouter);
@@ -25,6 +27,8 @@ app.use('/udp',udpRouter);
 app.use('/ping', pingRouter);
 app.use('/tls', tlsRouter);
 
+
+app.use('/ipurl', ipurlRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
