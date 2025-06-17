@@ -37,7 +37,7 @@ module.exports = (io) => {
                 io.to(room).emit('receive_result', {
                     type,
                     content,
-                    result: (result && result.length > 0) ? result : null,
+                    result: result ?? null,
                     from: socket.id,
                     username,
                 });

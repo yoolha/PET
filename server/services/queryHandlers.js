@@ -3,8 +3,7 @@ const { resolveCNAME, resolveMX } = require('./dnsService');
 const {tcpOriginal,tcpUpper,tcpLower,} = require('./tcpService');
 const {udpOriginal,udpUpper,udpLower,} = require('./udpService');
 const { resolvePing } = require('./pingService');
-const { resolveTls } = require('./tlsService');
-
+const { resolveTLS } = require('./tlsService');
 const { resolveA, resolvePTR } = require('./ipurlService');
 
 
@@ -23,8 +22,7 @@ const queryHandlers = {
     'UDP-LOWER': async (message) => await udpLower(message),
     // PING
     'PING': async (target) => await resolvePing(target),
-    'TLS': async (target) => await resolveTls(target)
-
+    'TLS': async (target) => await resolveTLS(target),
 
     'IPURL-A': async (domain) => await resolveA(domain),
     'IPURL-PTR': async (ip) => await resolvePTR(ip),
