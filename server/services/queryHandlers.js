@@ -1,6 +1,8 @@
 const { resolveCNAME, resolveMX } = require('./dnsService');
 const {tcpOriginal,tcpUpper,tcpLower,} = require('./tcpService');
 const {udpOriginal,udpUpper,udpLower,} = require('./udpService');
+const { resolvePing } = require('./pingService');
+const { resolveTls } = require('./tlsService');
 
 const queryHandlers = {
     'DNS-CNAME': async (domain) => await resolveCNAME(domain),
@@ -14,6 +16,9 @@ const queryHandlers = {
     'UDP-ORIGINAL': async (message) => await udpOriginal(message),
     'UDP-UPPER': async (message) => await udpUpper(message),
     'UDP-LOWER': async (message) => await udpLower(message),
+    // PING
+    'PING': async (target) => await resolvePing(target),
+    'TLS': async (target) => await resolveTls(target)
 
     // 다른 핸들러 추가(ICMP, TCP 등)
 };

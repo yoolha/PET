@@ -1,0 +1,15 @@
+const ping = require('ping');
+
+async function resolvePing(target) {
+  const result = await ping.promise.probe(target, {
+    timeout: 3,
+    extra: ['-c', '2'], // macOS/Linux 기준
+  });
+
+  return {
+    alive: result.alive,
+    time: result.time,
+  };
+}
+
+module.exports = { resolvePing };

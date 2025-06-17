@@ -14,14 +14,16 @@ const tcpRouter = require('./routes/tcpRoute');
 const udpRouter = require('./routes/udpRoute');
 const startTcpServer = require('./socketServer/tcpSocketServer');
 const startUdpServer = require('./socketServer/udpSocketServer');
-
+const pingRouter = require('./routes/pingRoute');
+const tlsRouter = require('./routes/tlsRoute');
 
 app.use(cors());
 app.use(express.json());
 app.use('/dns', dnsRouter);
 app.use('/tcp', tcpRouter);
 app.use('/udp',udpRouter);
-
+app.use('/ping', pingRouter);
+app.use('/tls', tlsRouter);
 
 
 app.get('/', (req, res) => {
