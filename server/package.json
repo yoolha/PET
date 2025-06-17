@@ -17,6 +17,7 @@
     "nodemon": "^3.1.10"
   },
   "dependencies": {
+    "babel-node": "^0.0.1-security",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "ping": "^0.4.4",
