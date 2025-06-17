@@ -19,6 +19,8 @@ const queryHandlers = {
     // PING
     'PING': async (target) => await resolvePing(target),
     'TLS': async (target) => await resolveTls(target)
+
+    // 다른 핸들러 추가(ICMP, TCP 등)
 };
 
 module.exports = queryHandlers;
